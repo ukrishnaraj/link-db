@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>db</title>
+    <script src="/jquery-1.12.3.js"></script>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+
+
+  </head>
+  <body>
+  <input id="num1">
+  <input id="num2">
+  <button id="sub">submit</button>
+  <button id="print">print</button>
+  <button id="del">delete</button>
+
+  <script >
+    jQuery(document).ready(function(){
+      $("#sub").click(function(){
+        $.ajax({
+          type:'POST',
+          url:'/post',
+          data:{
+            num1:$("#num1").val(),
+            num2:$("#num2").val()
+          },
+          success:function(data){
+            alert( data.status );
+          },
+          error:function(data){
+            alert("error");
+          }
+        });
+      });
+      $("#print").click(function()
+      {
+        $.ajax({
+          type: 'GET',
+          url: '/get',
+          data: {
+            number1: $("#num1").val(),
+            number2: $("#num2").val()
+          },
+          success: function (items) {
+            alert(items[0].number1);
+          },
+          error: function (data) {
+            alert("error");
+          }
+        });
+      });
+      $("#del").click(function()
+      {
+        $.ajax({
+          type: 'GET',
+          url: '/get',
+          data: {
+            number1: $("#num1").val(),
+            number2: $("#num2").val()
+          },
+          success: function (data) {
+            alert(data);
+          },
+          error: function (data) {
+            alert("error");
+          }
+        });
+      });
+    });
+  </script>
+  </body>
+</html>
